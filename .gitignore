@@ -1,5 +1,5 @@
 # Ignore .suo files
-.suo
+*.suo
 
 # Ignore files with the word "credential" in the title
 *credential*
