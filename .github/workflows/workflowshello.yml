@@ -9,7 +9,8 @@ jobs:
         run: echo "Hello, World!"
       - name: Goodby World
         run: echo "Goodby, World!"
-
+        
+name: Second Hello
 on: [push]
 jobs:
   second-job:
