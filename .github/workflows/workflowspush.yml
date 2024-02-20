@@ -5,4 +5,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: gut
-        run: "The only thing they fear is you"
+        run: echo "The only thing they fear is you"
