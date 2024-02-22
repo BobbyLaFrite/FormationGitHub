@@ -56,7 +56,7 @@ jobs:
             run: cat "log-${{needs.gen-output.outputs.date}}.log"
           - name: Git config
             run: |
-              git config --global user.email "samuel.casin45@gmail.com
+              git config --global user.email "samuel.casin45@gmail.com"
               git config --global user.name "BobbyLaFrite"  
           - name: Save on git
             run: |
