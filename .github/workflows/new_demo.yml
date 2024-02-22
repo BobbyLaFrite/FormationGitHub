@@ -54,15 +54,15 @@ jobs:
               name: log-file
           - name: Display artifact
             run: cat "log-${{needs.gen-output.outputs.date}}.txt"
-          - name: Git config
-            run: |
-              git config --global user.email "samuel.casin45@gmail.com"
-              git config --global user.name "BobbyLaFrite"  
-          - name: Save on git
-            run: |
-              git add "log-${{needs.gen-output.outputs.date}}.txt"
-              git commit -m "Add log file"
-              git push
+#          - name: Git config
+#            run: |
+#              git config --global user.email "samuel.casin45@gmail.com"
+#              git config --global user.name "BobbyLaFrite"  
+#          - name: Save on git
+#            run: |
+#              git add "log-${{needs.gen-output.outputs.date}}.txt"
+#              git commit -m "Add log file"
+#              git push
 
 
 
