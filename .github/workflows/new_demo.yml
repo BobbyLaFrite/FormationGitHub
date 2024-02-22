@@ -42,7 +42,7 @@ jobs:
                 path: log-*.log
 
     display-artifacts:
-        needs: gen-artifacts
+        needs: [gen-artifacts,gen-output]
         runs-on: ubuntu-latest
         steps:
           - name: Download artifact
@@ -50,7 +50,7 @@ jobs:
             with:
               name: log-file
           - name: Display artifact
-            run: cat log-*.log
+            run: cat "log-${{needs.gen-output.outputs.date}}.log"
 
     save-on-git:
         needs: [gen-artifacts,gen-output]
