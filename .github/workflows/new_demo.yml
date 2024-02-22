@@ -1,0 +1,34 @@
+#Cahier des charges de la fonction:
+#récupérer le nom de la branche, chopper la date et heure et mettre ca en output dans un fichier
+#récupérer le fichier dans un autre job, et lutiliser pour le formatter et l'afficher
+name: Use Artifacts
+on:
+    push:
+        branches:
+            - main
+            - *Test
+jobs:
+    gen-output:
+        runs-on: ubuntu-latest
+        outputs:
+            branch-name: ${{ steps.extract_branch_name.outputs.branch }}
+            date: ${{ steps.extract_date.outputs.date }}
+        steps:
+            - name: Get name branch
+              run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+              id: extract_branch_name
+            - name: Get hour and date
+              run: echo "date=${date + '%Y-%m-%d'}" >> $GITHUB_OUTPUT
+              id: extract_date
+
+    display-output:
+        needs: gen-output
+        runs-on: ubuntu-latest
+        steps:
+          - name: Display output
+            run: echo ${{ needs.gen-output.outputs.branch-name }} ${{ needs.gen-output.outputs.date }}
+
+        
+
+
+
