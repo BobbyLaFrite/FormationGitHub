@@ -53,7 +53,7 @@ jobs:
             run: cat log-*.log
 
     save-on-git:
-        needs: gen-artifacts
+        needs: [gen-artifacts,gen-output]
         runs-on: ubuntu-latest
         steps:
           - name: Checkout repo
@@ -65,9 +65,9 @@ jobs:
             
           - name: Save on git
             run: |
-              git add log-$(date '+%Y-%m-%d').log
+              git add "log-${{needs.gen-output.outputs.date}}.log"
               git commit -m "Add log file"
-              git push
+              git push origin mainWhat
 
 
 
