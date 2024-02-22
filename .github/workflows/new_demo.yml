@@ -27,6 +27,32 @@ jobs:
         steps:
           - name: Display output
             run: echo ${{ needs.gen-output.outputs.branch-name }} ${{ needs.gen-output.outputs.date }}
+    #Job qui run en parallel du premier (ainsi que ces descendants), qui a pour but de creer un fichier text de log tandis que son descendant l'affiche
+    gen-artifacts:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Checkout repo
+            uses: actions/checkout@v3
+          - name: Generate log file
+            run: echo "branch ${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}} was pushed at $(date '+%Y-%m-%d')" > "log-$(date '+%Y-%m-%d').log"
+          - name: Upload artifact
+            uses: actions/upload-artifact@v3
+            with:
+                name: log-file
+                path: log-*.log
+
+    display-artifacts:
+        needs: gen-artifacts
+        runs-on: ubuntu-latest
+        steps:
+          - name: Download artifact
+            uses: actions/download-artifact@v3
+            with:
+              name: log-file
+          - name: Display artifact
+            run: cat log-*.log
+
+
 
         
 
