@@ -35,7 +35,7 @@ jobs:
           - name: Checkout repo
             uses: actions/checkout@v3
           - name: Generate log file
-            run: echo "branch ${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}} was pushed at $(date '+%Y-%m-%d')" > "log-$(date '+%Y-%m-%d').log"
+            run: echo "branch ${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}} was pushed at ${{needs.gen-output.outputs.date}}" > "log-${{needs.gen-output.outputs.date}}.log"
           - name: Upload artifact
             uses: actions/upload-artifact@v3
             with:
