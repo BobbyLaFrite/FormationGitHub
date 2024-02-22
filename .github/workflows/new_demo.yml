@@ -30,6 +30,7 @@ jobs:
     #Job qui run en parallel du premier (ainsi que ces descendants), qui a pour but de creer un fichier text de log tandis que son descendant l'affiche
     gen-artifacts:
         runs-on: ubuntu-latest
+        needs: gen-output
         steps:
           - name: Checkout repo
             uses: actions/checkout@v3
@@ -39,7 +40,7 @@ jobs:
             uses: actions/upload-artifact@v3
             with:
                 name: log-file
-                path: log-*.log
+                path: "log-${{needs.gen-output.outputs.date}}.log"
 
     display-artifacts:
         needs: [gen-artifacts,gen-output]
@@ -67,7 +68,7 @@ jobs:
             run: |
               git add "log-${{needs.gen-output.outputs.date}}.log"
               git commit -m "Add log file"
-              git push origin mainWhat
+              git push
 
 
 
