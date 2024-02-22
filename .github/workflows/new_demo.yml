@@ -56,7 +56,7 @@ jobs:
             run: cat "log-${{needs.gen-output.outputs.date}}.log"
           - name: Save on git
             run: |
-              git add "log-${{needs.gen-output.outputs.date}}.log"
+              git add -f "log-${{needs.gen-output.outputs.date}}.log"
               git commit -m "Add log file"
               git push
 
