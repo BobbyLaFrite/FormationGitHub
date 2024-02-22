@@ -65,7 +65,7 @@ jobs:
             
           - name: Save on git
             run: |
-              git add log-*.log
+              git add log-$(date '+%Y-%m-%d').log
               git commit -m "Add log file"
               git push
 
