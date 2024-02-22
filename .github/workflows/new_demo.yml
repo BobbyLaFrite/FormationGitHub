@@ -52,6 +52,23 @@ jobs:
           - name: Display artifact
             run: cat log-*.log
 
+    save-on-git:
+        needs: gen-artifacts
+        runs-on: ubuntu-latest
+        steps:
+          - name: Checkout repo
+            uses: actions/checkout@v3
+          - name: conf git
+            run: |
+              git config --global user.email "samuel.casin45@gmail.com"
+              git config --global user.name "BobbyLaFrite"
+            
+          - name: Save on git
+            run: |
+              git add log-*.log
+              git commit -m "Add log file"
+              git push
+
 
 
         
